@@ -1,0 +1,55 @@
+.aside-btn{
+    height: 48px;
+    width: 100%;
+
+    padding: 0px 20px;
+
+    background-color: transparent;
+
+    border-radius: 10px;
+    border: none;
+
+    font-weight: 600;
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+
+    cursor: pointer;
+    transition-duration: 300ms;
+
+    font-size: 18px;
+
+    svg:nth-child(2){
+        display: none;
+    }
+}
+.aside-btn:hover{
+    background-color: rgba(211, 211, 211, 0.199);
+}
+.aside-btn:focus{
+
+}
+.active-asi-btn{
+    background-color: black;
+    color: white;
+    fill: white;
+
+    box-shadow: 0px 0px 15px darkgray;
+
+    svg:first-child{
+        display: none;
+    }
+    svg:nth-child(2){
+        display: block;
+    }
+}
+.active-asi-btn:hover{
+    background-color: black;
+    color: white;
+    fill: white;
+    box-shadow: 0px 0px 25px 3px darkgray;
+}

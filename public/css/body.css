@@ -1,0 +1,19 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: #fbfbfb;
+
+    overflow-x: hidden;
+}
+main{
+    height: 100%;
+    flex-grow: 1;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    overflow: hidden;
+}

@@ -1,0 +1,49 @@
+
+.search-div {
+    width: calc(30vw);
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    border-radius: 8px;
+    
+    overflow: hidden;
+    
+}
+
+.search-div input {
+    height: 100%;
+    width: 100%;
+    
+    font-size: 16px;
+    
+    padding: 10px 35px;
+    
+    border: none;
+    outline: none;
+
+    transition-duration: 300ms;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.search-div input::placeholder {
+    font-weight: 400;
+}
+
+.search-div input:focus {
+    padding: 20px;
+}
+
+.search-div input:focus~svg {
+    display: none;
+}
+
+.search-div svg {
+    position: absolute;
+    left: 10px;
+    fill: rgba(0, 0, 0, 0.699);
+
+    transition-duration: 300ms;
+}

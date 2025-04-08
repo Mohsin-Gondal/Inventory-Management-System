@@ -1,0 +1,85 @@
+.btn {
+    padding: 10px;
+
+    background-color: transparent;
+
+    border-radius: 10px;
+    border: none;
+
+    font-weight: 600;
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.btn-0 {
+    padding: 0px;
+}
+
+.btn-primary {
+    background-color: orange;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: rgba(0, 0, 0, 0.044);
+}
+
+.btn-secondary-outline {
+    border: 1px solid rgba(0, 0, 0, 0.103);
+}
+
+.btn-secondary:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.btn-svg {
+    padding: 0px;
+
+    height: 48px;
+    width: 48px;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.active-btn-svg {
+    background-color: black;
+    color: white;
+    fill: white;
+
+    box-shadow: 0px 0px 15px darkgray;
+}
+.active-btn-svg svg{
+    fill: white;
+}
+
+.active-btn-svg:hover {
+    background-color: black;
+    color: white;
+    fill: white;
+    box-shadow: 0px 0px 25px 3px darkgray;
+}
+
+.btn-img {
+    box-shadow: 0px 0px 10px lightgray;
+}
+
+.btn-img:hover {
+    box-shadow: 0px 0px 20px lightgray;
+}
+
+.btn-outline {}

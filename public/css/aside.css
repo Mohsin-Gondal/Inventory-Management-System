@@ -1,0 +1,22 @@
+.main-left{
+    border-right: 1px solid lightgray;
+
+    min-width: 280px;
+    width: 17%;
+    height: 100%;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-between;
+}
+
+.navigation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
