@@ -1,5 +1,4 @@
-
-.main-main{
+.main-main {
     flex-grow: 1;
     /* background-color: wheat; */
 
@@ -9,7 +8,79 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     position: relative;
+}
+
+.main-main-header {
+    padding: 20px;
+
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.main-main-header-left h2 {
+    font-size: 2rem;
+}
+.main-main-main{
+    padding: 15px;
+
+    flex-grow: 1;
+    position: relative;
+
+    overflow: hidden;
+}
+
+.main-main-main{
+   display: flex;
+   flex-direction: column;
+   /* gap: 10px; */
+}
+.main-main-main-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* border-bottom: 1px solid lightgray; */
+
+    padding-bottom: 20px;
+}
+.main-main-main-header .card{
+    flex-grow: 1;
+}
+
+.main-main-main-center{
+    background-color: white;
+
+    /* padding: 0px 10px 10px; */
+    margin-top: 10px;
+
+    border-radius: 10px;
+    text-align: center;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+
+    border: 1px solid lightgray;
+
+    flex-grow: 1;
+}
+.main-center-btns {
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    position: sticky;
+    top: 0px;
+
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
 }

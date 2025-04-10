@@ -47,3 +47,33 @@
 
     transition-duration: 300ms;
 }
+
+.float-btn{
+    padding:20px 25px;
+
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+
+    font-size: 1rem;
+
+    background-color: black;
+    color: white;
+
+    svg{
+        fill: white;
+    }
+
+    box-shadow: 0px 0px 30px #a9a9a9;
+}
+.float-btn:hover{
+    background-color: rgba(0, 0, 0, 0.849);
+}
+.center-nav-btn{
+    background-color: black;
+    color: white;
+}
+.center-nav-btn:hover{
+    background-color: rgba(0, 0, 0, 0.87);
+    color: white;
+}

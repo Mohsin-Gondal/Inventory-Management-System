@@ -1,0 +1,31 @@
+.list{
+    list-style: none;
+}
+table{
+    width: 100%;
+}
+.row{
+    width: 100%;
+
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+
+}
+.top-row{
+    border-bottom: 1px solid lightgray;
+}
+.row-part{
+    width: 20%;
+
+    display: flex;
+}
+
+/* <div class="row">
+<p class="row-part">ID</p>
+<p class="row-part">Name</p>
+<p class="row-part">Price</p>
+</div>   */
