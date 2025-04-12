@@ -43,3 +43,29 @@
 .width-fit{
     width: fit-content;
 }
+.flex-justalign-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-justalign-between-col{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+.no-border{
+    border: none;
+}
+.fs-1{
+    font-size: 1rem;
+}
+.fw-600{
+    font-weight: 600;
+}
+.mt-1{
+    margin-top: 10px;
+}
+.p-1{
+    padding: 10px;
+}

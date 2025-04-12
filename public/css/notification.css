@@ -18,6 +18,8 @@
 
     /* display: none; */
     transition-duration: 300ms;
+
+    background-color: white;
 }
 
 .notification-panel h2 {

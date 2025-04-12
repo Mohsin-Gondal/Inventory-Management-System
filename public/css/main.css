@@ -3,6 +3,7 @@
     /* background-color: wheat; */
 
     height: 100%;
+    width: 0%;
 
     padding: 10px;
 
@@ -83,4 +84,9 @@
 
     padding: 10px;
     border-bottom: 1px solid lightgray;
+}
+.main-main-main-center form{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
