@@ -1,0 +1,16 @@
+#new-stock-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+}
+.new-stock-form-right{
+    position: relative;
+    top:0px;
+    background-color: gray;
+
+    height: 100%;
+    /* width: 50%; */
+}

@@ -1,7 +1,7 @@
 var addToDamagedBtns = document.querySelectorAll('button[id="addToDamagedBtn"]');
 for (const btn of addToDamagedBtns) {
     btn.addEventListener('click', async () => {
-        let old_active_aside_btn = document.querySelector('.navigation .active-asi-btn');
+        let old_active_aside_btn = document.querySelector('.navigation button[data-nav-control="true"]');
         let backward_bav_btn = document.querySelector('#backward-nav');
         backward_bav_btn.onclick = (e) => {
             old_active_aside_btn.dispatchEvent(new Event('click'));
@@ -24,7 +24,7 @@ for (const btn of addToDamagedBtns) {
 var deleteBtns = document.querySelectorAll('#deleteProductBtn');
 for (const btn of deleteBtns) {
     btn.addEventListener('click', async () => {
-        let old_active_aside_btn = document.querySelector('.navigation .active-asi-btn');
+        let old_active_aside_btn = document.querySelector('.navigation button[data-nav-control="true"]');
         let backward_bav_btn = document.querySelector('#backward-nav');
         backward_bav_btn.onclick = (e) => {
             old_active_aside_btn.dispatchEvent(new Event('click'));

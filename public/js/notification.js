@@ -8,12 +8,17 @@ notificationButton.addEventListener('click', (e) => {
     if (is_open) {
         notficationPanel.style.transform = `translateX(${panelWidth}px)`;
         notificationButton.classList.toggle('active-btn-svg');
+        notficationPanel.dispatchEvent(new Event('focus'));
     } else {
         notficationPanel.style.transform = `translateX(0px)`;
         notificationButton.classList.toggle('active-btn-svg');
     }
     is_open = !is_open;
 });
+notficationPanel.addEventListener('mouseleave',(e)=>{
+    e.stopPropagation();
+    notificationButton.dispatchEvent(new Event('click'));
+})
 
 async function loadNotifications() {
     let response = await fetch('/notifications');

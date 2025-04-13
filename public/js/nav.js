@@ -27,6 +27,8 @@ function focusButton(Buttons, focus) {
 let [Dashboard_btn, DamagedStock_btn, ExpiredStock_btn, LowStock_btn] = Buttons;
 Dashboard_btn.addEventListener('click', async (e) => {
     // main_loader_container.classList.remove('display-none');
+    
+
     focusButton(Buttons, Dashboard_btn);
     let loader = createLoader();
     MAIN.appendChild(loader);
@@ -62,6 +64,10 @@ Dashboard_btn.addEventListener('click', async (e) => {
 
         loader.remove();
     });
+    for (const btn of Buttons) {
+        btn.setAttribute('data-nav-control', false);
+    }
+    Dashboard_btn.setAttribute('data-nav-control', true);
 });
 DamagedStock_btn.addEventListener('click', async (e) => {
     // main_loader_container.classList.remove('display-none');
@@ -77,6 +83,10 @@ DamagedStock_btn.addEventListener('click', async (e) => {
     script_ = script;
 
     loader.remove();
+    for (const btn of Buttons) {
+        btn.setAttribute('data-nav-control', false);
+    }
+    DamagedStock_btn.setAttribute('data-nav-control', true);
 });
 ExpiredStock_btn.addEventListener('click', async (e) => {
     // main_loader_container.classList.remove('display-none');
@@ -92,6 +102,10 @@ ExpiredStock_btn.addEventListener('click', async (e) => {
     script_ = script;
 
     loader.remove();
+    for (const btn of Buttons) {
+        btn.setAttribute('data-nav-control', false);
+    }
+    ExpiredStock_btn.setAttribute('data-nav-control', true);
 });
 LowStock_btn.addEventListener('click', async (e) => {
     // main_loader_container.classList.remove('display-none');
@@ -107,5 +121,9 @@ LowStock_btn.addEventListener('click', async (e) => {
     script_ = script;
 
     loader.remove();
+    for (const btn of Buttons) {
+        btn.setAttribute('data-nav-control', false);
+    }
+    LowStock_btn.setAttribute('data-nav-control', true);
 });
 Dashboard_btn.dispatchEvent(new Event('click'));

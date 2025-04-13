@@ -92,7 +92,7 @@ module.exports.findProductById = (id) => {
 }
 module.exports.findProductsByName = (Name) => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM products WHERE Name like ?;', `%${Name}%`, (err, resutls, fields) => {
+        connection.query('SELECT p.*,c.Name AS C_NAME FROM products p INNER JOIN categories c ON p.CategoryID = c.CategoryID WHERE p.Name like ?;', `%${Name}%`, (err, resutls, fields) => {
             if (err)
                 reject(err);
             else

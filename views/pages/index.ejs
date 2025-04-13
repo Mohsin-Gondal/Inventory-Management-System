@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/addDamaged.css">
     <link rel="stylesheet" href="/css/notification.css">
     <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/new-stock.css">
     <link rel="stylesheet" href="/css/js.css">
 </head>
 
@@ -38,7 +39,8 @@
             <h2>Dashboard</h2>
             <div class="header-right-main">
                 <div class="btn-svg search-div">
-                    <input class="btn-secondary" id="search-prod" name="search-prod" type="text" placeholder="Search products...">
+                    <input class="btn-secondary" id="search-prod" name="search-prod" type="text"
+                        placeholder="Search products...">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z">
@@ -60,7 +62,7 @@
     <main>
         <aside class="main-left">
             <nav class="navigation">
-                <button data-nav-control="false" class="aside-btn active-asi-btn">
+                <button data-nav-control=false class="aside-btn active-asi-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M14 21C13.4477 21 13 20.5523 13 20V12C13 11.4477 13.4477 11 14 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H14ZM4 13C3.44772 13 3 12.5523 3 12V4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H4ZM9 11V5H5V11H9ZM4 21C3.44772 21 3 20.5523 3 20V16C3 15.4477 3.44772 15 4 15H10C10.5523 15 11 15.4477 11 16V20C11 20.5523 10.5523 21 10 21H4ZM5 19H9V17H5V19ZM15 19H19V13H15V19ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V8C21 8.55228 20.5523 9 20 9H14C13.4477 9 13 8.55228 13 8V4ZM15 5V7H19V5H15Z">
@@ -73,7 +75,7 @@
                     </svg>
                     <p>Dashboard</p>
                 </button>
-                <button data-nav-control="false" class="aside-btn">
+                <button data-nav-control=false class="aside-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 16H5V5h14v14z">
@@ -87,7 +89,7 @@
                     </svg>
                     <p>Damaged Stock</p>
                 </button>
-                <button data-nav-control="false" class="aside-btn">
+                <button data-nav-control=false class="aside-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 4V6H15V4H9Z">
@@ -100,7 +102,7 @@
                     </svg>
                     <p>Expired Stock</p>
                 </button>
-                <button data-nav-control="false" class="aside-btn">
+                <button data-nav-control=false class="aside-btn">
                     <svg style="display: block;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <path
@@ -136,7 +138,7 @@
         </div>
 
         </div>
-        <aside class="notification-panel" style="transform: translateX(1000px);">
+        <aside tabindex="1" class="notification-panel" style="transform: translateX(1000px);">
             <h2>Notifications</h2>
             <div class="notifications">
 
@@ -149,8 +151,8 @@
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script> -->
     <script src="/js/loader.js"></script>
-    <script src="/js/notification.js"></script>
     <script src="/js/nav.js"></script>
+    <script src="/js/notification.js"></script>
     <script src="/js/damagepop.js"></script>
     <script src="/js/search.js"></script>
 </body>

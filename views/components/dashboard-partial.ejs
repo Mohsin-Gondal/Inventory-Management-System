@@ -50,8 +50,8 @@
     </div>
     <div class="main-main-main-center">
         <div class="main-center-btns">
-            <button class="btn btn-secondary center-nav-btn">Recently Added Products</button>
-            <button class="btn btn-secondary">All Products</button>
+            <button class="btn btn-secondary center-nav-btn">All Products</button>
+            <!-- <button class="btn btn-secondary">All Products</button> -->
         </div>
         <table>
             <thead>
@@ -77,7 +77,7 @@
                     <td class="row-part"><%= product.Quantity %></td>
                     <td class="row-part">
                         <%  if(moment(product.ExpiryDate).isBefore(moment(),'day')){ %>
-                            <p class="value value-danger no-border">Low Stock</p>
+                            <p class="value value-danger no-border">Expired</p>
                         <% }else if(product.Quantity < 50){%>
                             <p class="value value-warn no-border">Low Stock</p>
                         <%  }else{ %>
