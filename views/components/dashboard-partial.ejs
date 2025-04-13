@@ -23,19 +23,26 @@
                 </button>
 
                 <div class="card-top-value">
-                    <p class="value value-warn">200 Items Damaged</p>
-                    <p class="value value-danger">12 Items Expired</p>
-                    <p class="value value-warn">52 Items On Low</p>
+                   <% if(damagedCount){%>
+                    <p class="value value-warn"><%= damagedCount %> Items Damaged</p>
+                   <% } %>
+                   
+                   <% if(expiredCount){%>
+                    <p class="value value-danger"><%= expiredCount %> Items Expired</p>
+                   <% } %>
+                   <% if(lowCount){%>
+                    <p class="value value-warn"><%= lowCount %> Products On Low</p>
+                   <% } %>
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414z"></path></svg> -->
 
                 </div>
             </div>
             <div class="card-bottom">
                 <p class="card-bottom-header">
-                    Total Products
+                    Total Available Products
                 </p>
                 <h1 class="card-bottom-value">
-                    <%= totalProducts %>
+                    <%= allProductsCount %>
                 </h1>
             </div>
         </div>
@@ -61,15 +68,15 @@
                 </tr>
             </thead>
             <tbody>
-                <% for(const product of products) { %>
+                <% for(const product of allProducts) { %>
                 <tr class="row top-row">
-                    <td class="row-part"><%= product.id %></td>
+                    <td class="row-part"><%= product.ProductID   %></td>
                     <td class="row-part"><%= product.Name %></td>
-                    <td class="row-part"><%= product.Category %></td>
+                    <td class="row-part"><%= product.C_NAME %></td>
                     <td class="row-part"><%= product.Price %>$</td>
                     <td class="row-part"><%= product.Quantity %></td>
                     <td class="row-part">
-                        <%  if(product.Quantity < 100){  %>
+                        <%  if(product.Quantity < 50){  %>
                             <p class="value value-warn no-border">Low Stock</p>
                         <%  }else{ %>
                                 <p class="value no-border">Available</p>
@@ -77,7 +84,7 @@
                     </td>
                     <td class="row-part"><%= moment(product.ExpiryDate).format('YYYY/MM/DD') %></td>
                     <td class="row-part flex-justalign-center">
-                        <button id="addToDamagedBtn" class="btn btn-secondary">
+                        <button data-prod="<%= product.ProductID %>" id="addToDamagedBtn" class="btn btn-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path
                                     d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.994.994 0 0 0-.294-.708zM6.414 4h11.172l.999.999H5.415L6.414 4zM4 19V6.999h16L20.002 19H4z">
@@ -87,7 +94,7 @@
                         </button>
                     </td>
                     <td class="row-part flex-justalign-center">
-                        <button id="deleteProductBtn" class="btn btn-secondary">
+                        <button data-prod="<%= product.ProductID %>" id="deleteProductBtn" class="btn btn-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z">

@@ -48,17 +48,34 @@
     align-items: center;
     justify-content: center;
 }
+.flex-justalign-center-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .flex-justalign-between-col{
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
 }
+.flex-justalign-between-row{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+.g-1{
+    gap: 10px;
+}
 .no-border{
     border: none;
 }
 .fs-1{
     font-size: 1rem;
+}
+.fs-2{
+    font-size: 2rem;
 }
 .fw-600{
     font-weight: 600;
@@ -68,4 +85,7 @@
 }
 .p-1{
     padding: 10px;
+}
+.p-1-5{
+    padding: 15px;
 }

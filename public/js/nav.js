@@ -1,3 +1,4 @@
+let script_added = false;
 let Buttons = document.querySelectorAll('.navigation .aside-btn');
 let main_loader_container = document.querySelector('.main-main .loader-container');
 let MAIN = document.querySelector('.main-main');
@@ -27,6 +28,10 @@ Dashboard_btn.addEventListener('click', async (e) => {
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
 
+    let script = document.createElement('script');
+    script.setAttribute('src', '/js/toolsDB.js');
+    body.appendChild(script);
+    script_added = true;
     loader.remove();
 
 
