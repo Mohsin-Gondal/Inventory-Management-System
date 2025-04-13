@@ -7,9 +7,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 20c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2h-2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1H5c-1.103 0-2 .897-2 2v15zM5 5h2v2h10V5h2v15H5V5z"></path><path d="M14.292 10.295 12 12.587l-2.292-2.292-1.414 1.414 2.292 2.292-2.292 2.292 1.414 1.414L12 15.415l2.292 2.292 1.414-1.414-2.292-2.292 2.292-2.292z"></path></svg>
                 </button>
                 <div class="card-top-value">
-                    <p class="value">10,200 Prodcuts</p>
-                    <p class="value value-warn">52 On Low</p>
-                    <p class="value value-danger">200 Damaged</p>
+                    <p class="value"><%= allProductsCount %> Prodcuts Available</p>
+                    <p class="value value-warn"><%= lowCount %> On Low</p>
+                    <p class="value value-danger"><%= damagedCount %> Damaged</p>
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414z"></path></svg> -->
 
                 </div>
@@ -19,7 +19,7 @@
                     Expired Stock
                 </p>
                 <h1 class="card-bottom-value">
-                    200
+                    <%= expiredCount %>
                 </h1>
             </div>
         </div>
@@ -41,28 +41,32 @@
                     <th class="row-part">Price</th>
                     <th class="row-part">Quantity</th>
                     <th class="row-part">Expiry Date</th>
-                    <th class="row-part">Tools (Add to Damaged)</th>
+                    <!-- <th class="row-part">Tools (Add to Damaged)</th> -->
                 </tr>
             </thead>
             <tbody>
-                <tr class="row top-row">
-                    <td class="row-part">1</td>
-                    <td class="row-part">Vitamin C</td>
-                    <td class="row-part">Medicine</td>
-                    <td class="row-part">12$</td>
-                    <td class="row-part">20</td>
-                    <td class="row-part">2 DEC 2026</td>
-                    <td class="row-part flex-justalign-center">
-                        <button id="addToDamagedBtn" class="btn btn-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path
-                                    d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.994.994 0 0 0-.294-.708zM6.414 4h11.172l.999.999H5.415L6.414 4zM4 19V6.999h16L20.002 19H4z">
-                                </path>
-                                <path d="M15 12H9v-2H7v4h10v-4h-2z"></path>
-                            </svg>
-                        </button>
-                    </td>
-                </tr>
+                <% for (const product of allProducts) { %>
+                    <% if((moment(product.ExpiryDate).isBefore(moment()))){ %>
+                        <tr class="row top-row">
+                            <td class="row-part"><%= product.ProductID %></td>
+                            <td class="row-part"><%= product.Name %></td>
+                            <td class="row-part"><%= product.C_NAME %></td>
+                            <td class="row-part"><%= product.Price %>$</td>
+                            <td class="row-part"><%= product.Quantity %></td>
+                            <td class="row-part"><%= moment(product.ExpiryDate).format("DD-MM-YYYY") %></td>
+                            <!-- <td class="row-part flex-justalign-center">
+                                <button id="addToDamagedBtn" class="btn btn-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path
+                                            d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.994.994 0 0 0-.294-.708zM6.414 4h11.172l.999.999H5.415L6.414 4zM4 19V6.999h16L20.002 19H4z">
+                                        </path>
+                                        <path d="M15 12H9v-2H7v4h10v-4h-2z"></path>
+                                    </svg>
+                                </button>
+                            </td> -->
+                        </tr>
+                    <% } %>
+                <% } %>
 
             </tbody>
 

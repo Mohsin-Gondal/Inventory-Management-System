@@ -11,7 +11,7 @@ module.exports.getAllProducts = () => {
 }
 module.exports.getDamagedProducts = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT damaged_stock.*,products.*,categories.Name AS C_NAME FROM damaged_stock INNER JOIN products ON damaged_stock.ProductID = products.ProductID INNER JOIN categories ON products.CategoryID = categories.CategoryID;', (err, resutls, fields) => {
+        connection.query('SELECT damaged_stock.*,damaged_stock.Quantity AS D_Quantity,products.*,categories.Name AS C_NAME FROM damaged_stock INNER JOIN products ON damaged_stock.ProductID = products.ProductID INNER JOIN categories ON products.CategoryID = categories.CategoryID;', (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -29,16 +29,7 @@ module.exports.getExpiredProducts = () => {
         });
     });
 }
-module.exports.getAllNotifications = () => {
-    return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM notifications', (err, resutls, fields) => {
-            if (err)
-                reject(err);
-            else
-                resolve(resutls);
-        });
-    });
-}
+
 module.exports.getProductsCount = () => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT SUM(Quantity) AS Total FROM products', (err, resutls, fields) => {
@@ -79,6 +70,16 @@ module.exports.getLowCount = () => {
         });
     });
 }
+module.exports.getProductDamagedQuantity = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT Quantity FROM damaged_stock WHERE ProductID = ?;', id, (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0].Quantity);
+        });
+    });
+}
 module.exports.findProductById = (id) => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM products WHERE ProductID = ?;', id, (err, resutls, fields) => {
@@ -86,6 +87,16 @@ module.exports.findProductById = (id) => {
                 reject(err);
             else
                 resolve(resutls[0]);
+        });
+    });
+}
+module.exports.findProductsByName = (Name) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM products WHERE Name like ?;', `%${Name}%`, (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
         });
     });
 }
@@ -123,6 +134,46 @@ module.exports.updateProductQuantity = (id, quantity) => {
                 reject(err);
             else
                 resolve(resutls);
+        });
+    });
+}
+module.exports.updateDamagedProductQuantity = (id, quantity) => {
+    return new Promise((resolve, reject) => {
+        connection.query('UPDATE damaged_stock SET Quantity = ? WHERE ProductID = ?;', [quantity, id], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.getAllNotifications = () => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM notifications', (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.getNotificationById = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM notifications WHERE NotificationID = ?', id, (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0]);
+        });
+    });
+}
+module.exports.deleteNotificationById = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query('DELETE FROM notifications WHERE NotificationID = ?', id, (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0]);
         });
     });
 }

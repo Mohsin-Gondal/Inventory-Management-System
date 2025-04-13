@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/card.css">
     <link rel="stylesheet" href="/css/addDamaged.css">
     <link rel="stylesheet" href="/css/notification.css">
+    <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" href="/css/js.css">
 </head>
 
@@ -27,7 +28,7 @@
     <header>
         <div class="header-left">
             <img src="/img/logo.png" alt="logo">
-            <button class="btn btn-secondary btn-svg">
+            <button id="backward-nav" class="btn btn-secondary btn-svg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path>
                 </svg>
@@ -37,12 +38,13 @@
             <h2>Dashboard</h2>
             <div class="header-right-main">
                 <div class="btn-svg search-div">
-                    <input class="btn-secondary" id="search-prod" type="text" placeholder="Search products...">
+                    <input class="btn-secondary" id="search-prod" name="search-prod" type="text" placeholder="Search products...">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z">
                         </path>
                     </svg>
+                    <!-- <div class="searched-content">Content</d data-nav-control="false"iv> -->
                 </div>
                 <button id="notification-btn" class="btn btn-secondary btn-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -58,7 +60,7 @@
     <main>
         <aside class="main-left">
             <nav class="navigation">
-                <button class="aside-btn active-asi-btn">
+                <button data-nav-control="false" class="aside-btn active-asi-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M14 21C13.4477 21 13 20.5523 13 20V12C13 11.4477 13.4477 11 14 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H14ZM4 13C3.44772 13 3 12.5523 3 12V4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H4ZM9 11V5H5V11H9ZM4 21C3.44772 21 3 20.5523 3 20V16C3 15.4477 3.44772 15 4 15H10C10.5523 15 11 15.4477 11 16V20C11 20.5523 10.5523 21 10 21H4ZM5 19H9V17H5V19ZM15 19H19V13H15V19ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V8C21 8.55228 20.5523 9 20 9H14C13.4477 9 13 8.55228 13 8V4ZM15 5V7H19V5H15Z">
@@ -71,7 +73,7 @@
                     </svg>
                     <p>Dashboard</p>
                 </button>
-                <button class="aside-btn">
+                <button data-nav-control="false" class="aside-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 16H5V5h14v14z">
@@ -85,7 +87,7 @@
                     </svg>
                     <p>Damaged Stock</p>
                 </button>
-                <button class="aside-btn">
+                <button data-nav-control="false" class="aside-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 4V6H15V4H9Z">
@@ -98,7 +100,7 @@
                     </svg>
                     <p>Expired Stock</p>
                 </button>
-                <button class="aside-btn">
+                <button data-nav-control="false" class="aside-btn">
                     <svg style="display: block;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <path
@@ -137,33 +139,7 @@
         <aside class="notification-panel" style="transform: translateX(1000px);">
             <h2>Notifications</h2>
             <div class="notifications">
-                <% for (const notification of notifications) { %>
-                    <div class="card notification-card">
-                        <div class="card-top">
-                            <button class="btn btn-secondary-outline">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z">
-                                </svg>
-                            </button>
 
-                            <div class="card-top-value">
-                                <p class="value">
-                                    <%= moment(notification.DateGenerated).format("MMMM Do YYYY, h:mm:ss a"); %>
-                                </p>
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414z"></path></svg> -->
-                            </div>
-                        </div>
-                        <div class="card-bottom">
-                            <p class="card-bottom-header">
-                                <%= notification.Title %>
-                            </p>
-                            <h1 class="card-bottom-value">
-                                <%= notification.Description %>
-                            </h1>
-                        </div>
-                    </div>
-                    <% } %>
 
             </div>
         </aside>
@@ -176,6 +152,7 @@
     <script src="/js/notification.js"></script>
     <script src="/js/nav.js"></script>
     <script src="/js/damagepop.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 
 </html>

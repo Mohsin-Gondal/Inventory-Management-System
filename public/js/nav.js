@@ -1,14 +1,20 @@
-let script_added = false;
+let script_;
 let Buttons = document.querySelectorAll('.navigation .aside-btn');
 let main_loader_container = document.querySelector('.main-main .loader-container');
 let MAIN = document.querySelector('.main-main');
 let Dashboard = document.querySelector('#idashboard');
 function focusButton(Buttons, focus) {
     for (const btn of Buttons) {
+        if (script_)
+            script_.remove();
         btn.classList.remove('active-asi-btn');
+
     }
-    if (focus)
+    if (focus) {
         focus.classList.add('active-asi-btn');
+    }
+
+
     // for (const Button of Buttons) {
     //     Button.addEventListener('click', () => {
     //         for (const btn of Buttons) {
@@ -29,20 +35,30 @@ Dashboard_btn.addEventListener('click', async (e) => {
     MAIN.innerHTML = DOM;
 
     let script = document.createElement('script');
-    script.setAttribute('src', '/js/toolsDB.js');
+    script.setAttribute('src', '/js/dashboardAddDelete.js');
     body.appendChild(script);
-    script_added = true;
+    script_ = script;
+
     loader.remove();
 
+    let old_active_aside_btn = document.querySelector('.navigation .active-asi-btn');
 
     let newStockBtn = document.querySelector('#newStockBtn');
     newStockBtn.addEventListener('click', async () => {
         focusButton(Buttons);
+
+        let backward_bav_btn = document.querySelector('#backward-nav');
+        backward_bav_btn.onclick = (e) => {
+            old_active_aside_btn.dispatchEvent(new Event('click'));
+        }
+
         let loader = createLoader();
         MAIN.appendChild(loader);
         let response = await fetch('/partial/new');
         let DOM = await response.text();
         MAIN.innerHTML = DOM;
+
+
 
         loader.remove();
     });
@@ -55,6 +71,10 @@ DamagedStock_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/damaged');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
+    let script = document.createElement('script');
+    script.setAttribute('src', '/js/damagedRemoveDelete.js');
+    body.appendChild(script);
+    script_ = script;
 
     loader.remove();
 });
@@ -66,6 +86,10 @@ ExpiredStock_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/expired');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
+    let script = document.createElement('script');
+    script.setAttribute('src', '/js/expiredDelete.js');
+    body.appendChild(script);
+    script_ = script;
 
     loader.remove();
 });
@@ -77,6 +101,10 @@ LowStock_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/low');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
+    let script = document.createElement('script');
+    script.setAttribute('src', '/js/lowDelete.js');
+    body.appendChild(script);
+    script_ = script;
 
     loader.remove();
 });

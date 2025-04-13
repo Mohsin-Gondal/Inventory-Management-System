@@ -1,6 +1,6 @@
 <div class="main-main-header">
     <div class="main-main-header-left">
-        <h2>Manage Products</h2>
+        <h2>Remove From Damaged</h2>
     </div>
     <div class="main-main-header-right">
         <button class="btn btn-secondary btn-svg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -21,22 +21,22 @@
             </p>
         </div>
         <p class="fs-1 fw-600">Quantity</p>
-        <form data-form="deleteProductForm" id="deleteProductForm" method="post" action="/products/<%= product.ProductID %>?_method=DELETE" class="plus-minus-input flex-justalign-center g-1">
+        <form data-form="damagedRemoveForm" id="removeDamagedForm" method="post" action="/damaged_products/<%= product.ProductID %>?_method=DELETE" class="plus-minus-input flex-justalign-center g-1">
             <button type="button" data-action="decrement" class="btn btn-secondary btn-svg">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                     <path d="M5 11V13H19V11H5Z"></path>
                 </svg>
             </button>
-            <input placeholder="How many to delete?" name="count" class="btn btn-secondary btn-svg fs-1 p-1 width-fit" type="number" min="1" value="1">
+            <input placeholder="How many to Remove?" name="count" class="btn btn-secondary btn-svg fs-1 p-1 width-fit" type="number" min="1" value="1">
             <button type="button" data-action="increment" class="btn btn-secondary btn-svg">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                     <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                 </svg>
             </button>
-            <button id="deleteProduct" style="visibility: hidden;"></button>
+            <button id="removeDamaged" style="visibility: hidden;"></button>
         </form>
     </div>
-    <label for="deleteProduct" type="submit" class="btn active-asi-btn flex-justalign-center mt-1 fs-1">
+    <label for="removeDamaged" type="submit" class="btn active-asi-btn flex-justalign-center mt-1 fs-1">
         Save
     </label>
 </div>

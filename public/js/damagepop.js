@@ -89,3 +89,57 @@ function setupDynamicFormSubmission_for_Delete(btn_active_after_submission) {
         }
     });
 }
+function setupDynamicFormSubmission_for_Delete_Damaged(btn_active_after_submission) {
+    const form = document.querySelector('[data-form="deleteDamagedProductForm"]');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const count = formData.get('count');
+        let urlEncodedData = new URLSearchParams(formData).toString();
+        const actionUrl = form.getAttribute('action');
+
+        try {
+            const res = await fetch(actionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: urlEncodedData
+            });
+            let result = await res.json();
+            btn_active_after_submission.dispatchEvent(new Event('click'));
+        } catch (err) {
+            console.error(err);
+        }
+    });
+}
+function setupDynamicFormSubmission_for_Remove_Damaged(btn_active_after_submission) {
+    const form = document.querySelector('[data-form="damagedRemoveForm"]');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const count = formData.get('count');
+        let urlEncodedData = new URLSearchParams(formData).toString();
+        const actionUrl = form.getAttribute('action');
+
+        try {
+            const res = await fetch(actionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: urlEncodedData
+            });
+            let result = await res.json();
+            btn_active_after_submission.dispatchEvent(new Event('click'));
+        } catch (err) {
+            console.error(err);
+        }
+    });
+}

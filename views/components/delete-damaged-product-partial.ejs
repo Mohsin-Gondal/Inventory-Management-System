@@ -1,6 +1,6 @@
 <div class="main-main-header">
     <div class="main-main-header-left">
-        <h2>Manage Products</h2>
+        <h2>Manage Damaged Products</h2>
     </div>
     <div class="main-main-header-right">
         <button class="btn btn-secondary btn-svg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -21,7 +21,7 @@
             </p>
         </div>
         <p class="fs-1 fw-600">Quantity</p>
-        <form data-form="deleteProductForm" id="deleteProductForm" method="post" action="/products/<%= product.ProductID %>?_method=DELETE" class="plus-minus-input flex-justalign-center g-1">
+        <form data-form="deleteDamagedProductForm" id="deleteProductForm" method="post" action="/products/<%= product.ProductID %>?_method=DELETE&from=DAMAGED" class="plus-minus-input flex-justalign-center g-1">
             <button type="button" data-action="decrement" class="btn btn-secondary btn-svg">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                     <path d="M5 11V13H19V11H5Z"></path>

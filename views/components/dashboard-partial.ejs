@@ -76,7 +76,9 @@
                     <td class="row-part"><%= product.Price %>$</td>
                     <td class="row-part"><%= product.Quantity %></td>
                     <td class="row-part">
-                        <%  if(product.Quantity < 50){  %>
+                        <%  if(moment(product.ExpiryDate).isBefore(moment(),'day')){ %>
+                            <p class="value value-danger no-border">Low Stock</p>
+                        <% }else if(product.Quantity < 50){%>
                             <p class="value value-warn no-border">Low Stock</p>
                         <%  }else{ %>
                                 <p class="value no-border">Available</p>
