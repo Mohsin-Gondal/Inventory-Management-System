@@ -27,7 +27,7 @@ function focusButton(Buttons, focus) {
 let [Dashboard_btn, DamagedStock_btn, ExpiredStock_btn, LowStock_btn] = Buttons;
 Dashboard_btn.addEventListener('click', async (e) => {
     // main_loader_container.classList.remove('display-none');
-    
+
 
     focusButton(Buttons, Dashboard_btn);
     let loader = createLoader();
@@ -59,6 +59,10 @@ Dashboard_btn.addEventListener('click', async (e) => {
         let response = await fetch('/partial/new');
         let DOM = await response.text();
         MAIN.innerHTML = DOM;
+        let script = document.createElement('script');
+        script.setAttribute('src', '/js/newStock.js');
+        body.appendChild(script);
+        script_ = script;
 
 
 

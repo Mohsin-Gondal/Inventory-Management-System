@@ -223,6 +223,38 @@ app.delete('/notifications/:id', (req, res) => {
     DB.deleteNotificationById(id);
     res.status(200).json({ success: true, message: "Notification Deleted" });
 });
+app.post('/categories', async (req, res) => {
+    let { name, description } = req.body;
+    try {
+        await DB.addCategory(name, description);
+        res.status(200).json({ success: true, message: 'Category Added Successfully' });
+    } catch (er) {
+        res.status(400).json({ success: false, message: er.message });
+    }
+
+});
+app.post('/products', async (req, res) => {
+    let { name, price, expiryDate, categoryId } = req.body;
+    try {
+        await DB.addProduct(name, 0, price, expiryDate, categoryId);
+        res.status(200).json({ success: true, message: 'Product Added Successfully' });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+
+});
+app.get('/products', async (req, res) => {
+    try {
+        let response = await DB.getAllProducts();
+        let result = await response.json();
+        res.status(200).json(result);
+    } catch (er) {
+        res.status(500).json({ success: false, message: er.message });
+    }
+})
+app.post('/stock', async (req,res)=>{
+
+});
 
 
 //Server Listening

@@ -177,6 +177,97 @@ module.exports.deleteNotificationById = (id) => {
         });
     });
 }
+module.exports.addCategory = (title, desc) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO categories (Name,Description) VALUES (?,?)', [title, desc], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.getAllCategories = () => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM categories;', (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.getCategoryById = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM categories WHERE CategoryID = ?;', id, (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0]);
+        });
+    });
+}
+module.exports.addProduct = (Name,Quantity,Price,ExpiryDate,CategoryID) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO products (Name,Quantity,Price,ExpiryDate,CategoryID) VALUES (?,?,?,?,?);', [Name,Quantity,Price,ExpiryDate,CategoryID], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.getLastStockId = () => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT MAX(StockID) AS Stock_ID stock_tracking;', (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0].Stock_ID);
+        });
+    });
+}
+module.exports.addProductToStock = (StockID,ProductID) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO stock_has_products (StockID,ProductID) VALUES (?,?);', [StockID,ProductID], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+
+module.exports.addStock = (StockID,Quantity,DateAdded,SupplierID) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO stock_tracking (StockID,QuantityRecieved,DateAdded,SupplierID) VALUES (?,?,?,?);', [StockID,Quantity,DateAdded,SupplierID], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.addSupplier = (Name,Address,Email,SpecCategory) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO suppliers (Name,Address,Email,SpecCategory) VALUES (?,?,?,?);', [Name,Address,Email,SpecCategory], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
+module.exports.getAllSuplliers = () => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM suppliers;', (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
+        });
+    });
+}
 module.exports.connection = connection;
 
 
