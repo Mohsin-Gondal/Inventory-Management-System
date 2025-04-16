@@ -82,7 +82,7 @@ module.exports.getProductDamagedQuantity = (id) => {
 }
 module.exports.findProductById = (id) => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM products WHERE ProductID = ?;', id, (err, resutls, fields) => {
+        connection.query('SELECT p.*,c.Name AS C_NAME FROM products p INNER JOIN categories c ON p.CategoryID = c.CategoryID WHERE ProductID = ?;', id, (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -125,6 +125,17 @@ module.exports.addDamaged = (id, quantity) => {
                     resolve(resutls);
             });
         })
+    });
+}
+
+module.exports.getProductQuantity = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT Quantity FROM products  WHERE ProductID = ?;', [id], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0].Quantity);
+        });
     });
 }
 module.exports.updateProductQuantity = (id, quantity) => {
@@ -219,7 +230,7 @@ module.exports.addProduct = (Name,Quantity,Price,ExpiryDate,CategoryID) => {
 }
 module.exports.getLastStockId = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT MAX(StockID) AS Stock_ID stock_tracking;', (err, resutls, fields) => {
+        connection.query('SELECT MAX(StockID) AS Stock_ID FROM stock_tracking;', (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -240,7 +251,7 @@ module.exports.addProductToStock = (StockID,ProductID) => {
 
 module.exports.addStock = (StockID,Quantity,DateAdded,SupplierID) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO stock_tracking (StockID,QuantityRecieved,DateAdded,SupplierID) VALUES (?,?,?,?);', [StockID,Quantity,DateAdded,SupplierID], (err, resutls, fields) => {
+        connection.query('INSERT INTO `stock_tracking` (StockID,QuantityReceived,DateAdded,SupplierID) VALUES (?,?,?,?);', [StockID,Quantity,DateAdded,SupplierID], (err, resutls, fields) => {
             if (err)
                 reject(err);
             else

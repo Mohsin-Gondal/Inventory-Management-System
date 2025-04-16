@@ -24,36 +24,12 @@
             <div class="round-0 new-stock-main-left shadow-1  single-form-inside">
                 <h3>Add Products to Stock</h3>
                 <div class="stock-products height-100 max-height-100">
-                    <div class="card width-100 mt-1">
-                        <div class="card-top justify-start g-1">
-                            <button class="btn btn-secondary-outline">Stationary</button>
-                            <p class="btn btn-secondary-outline align-self-start fs-normal-1">60 Units</p>
-                            <p class="flex-grow-1"></p>
-
-                            <p class="card-bottom-header flex-justalign-between-col">
-                                <b>1.5$/Unit</b>
-                                <b>EXP: 11 AUG 2027</b>
-                            </p>
-                        </div>
-                        <div class="card-bottom flex-end justify-between">
-                            <h1 class="card-bottom-value">A4 Notebooks</h1>
-                            <button class="btn btn-secondary btn-svg">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                    fill="currentColor">
-                                    <path
-                                        d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                   
                 </div>
                 <form id="addStockForm" class="height-auto single-form mt-1" method="POST" action="/stock">
-                    <div class="card width-100">
+                    <div class="card width-100" id="newProductInStockCard">
                         <div class="card-top">
-                            <select class="btn btn-secondary-outline width-100">
-                                <option value="1">A4 Pages</option>
-                                <option value="2">Wireless Mouse</option>
+                            <select id="productsSelection" class="btn btn-secondary-outline width-100">
                             </select>
                             <div class="card-top-value">
                             </div>
@@ -62,7 +38,7 @@
                             <label for="QuantityRecieved"><b>Units Recieved</b></label>
                             <input id="QuantityRecieved" name="QuantityRecieved"
                                 class="btn btn-secondary btn-svg p-1 fs-1" type="number" min="1" value="1">
-                            <button class="btn btn-secondary btn-svg">
+                            <button type="button" id="addToStockBtn" class="btn btn-secondary btn-svg">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     fill="currentColor">
                                     <path
@@ -76,10 +52,7 @@
                     <button id="add_stock" style="visibility: hidden;">Submit</button>
                 </form>
                 <h4 class="text-align-start p-1">Supplier</h4>
-                <select class="input width-100" type="text" name="supplier" id="supplier">
-                    <option value="1">Mohsin</option>
-                    <option value="2">Hassan</option>
-                    <option value="3">Usman</option>
+                <select id="supplierSelect" class="input width-100" type="text" name="supplier" id="supplier">
                 </select>
             </div>
             <div class="new-stock-main-right">
@@ -110,9 +83,9 @@
             </div>
         </div>
     </div>
-    <label for="add_stock" id="saveStockBtn" class="btn active-asi-btn flex-justalign-center mt-1 fs-1">
+    <button id="saveStockBtn" class="btn active-asi-btn flex-justalign-center mt-1 fs-1">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>
         </svg>
         Add Stock
-    </label>
+    </button>
