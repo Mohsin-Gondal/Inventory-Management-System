@@ -1,3 +1,5 @@
+// import { initNewStockPage } from './newStockHelper.js';
+let newStockBtn = document.querySelector('#newStockBtn');
 let script_;
 let Buttons = document.querySelectorAll('.navigation .aside-btn');
 let main_loader_container = document.querySelector('.main-main .loader-container');
@@ -35,17 +37,18 @@ Dashboard_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/dashboard');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
-
-    let script = document.createElement('script');
-    script.setAttribute('src', '/js/dashboardAddDelete.js');
-    body.appendChild(script);
-    script_ = script;
-
+    let last_script = document.querySelector('script:last-child');
+    if (!(last_script.getAttribute('src') == '/js/dashboardAddDelete.js')) {
+        let script = document.createElement('script');
+        script.setAttribute('src', '/js/dashboardAddDelete.js');
+        body.appendChild(script);
+        script_ = script;
+    }
     loader.remove();
 
     let old_active_aside_btn = document.querySelector('.navigation .active-asi-btn');
 
-    let newStockBtn = document.querySelector('#newStockBtn');
+    newStockBtn = document.querySelector('#newStockBtn');
     newStockBtn.addEventListener('click', async () => {
         focusButton(Buttons);
 
@@ -59,10 +62,7 @@ Dashboard_btn.addEventListener('click', async (e) => {
         let response = await fetch('/partial/new');
         let DOM = await response.text();
         MAIN.innerHTML = DOM;
-        let script = document.createElement('script');
-        script.setAttribute('src', '/js/newStock.js');
-        body.appendChild(script);
-        script_ = script;
+        initNewStockLogic();
 
 
 
@@ -81,11 +81,13 @@ DamagedStock_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/damaged');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
-    let script = document.createElement('script');
-    script.setAttribute('src', '/js/damagedRemoveDelete.js');
-    body.appendChild(script);
-    script_ = script;
-
+    let last_script = document.querySelector('script:last-child');
+    if (!(last_script.getAttribute('src') == '/js/damagedRemoveDelete.js')) {
+        let script = document.createElement('script');
+        script.setAttribute('src', '/js/damagedRemoveDelete.js');
+        body.appendChild(script);
+        script_ = script;
+    }
     loader.remove();
     for (const btn of Buttons) {
         btn.setAttribute('data-nav-control', false);
@@ -100,11 +102,13 @@ ExpiredStock_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/expired');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
-    let script = document.createElement('script');
-    script.setAttribute('src', '/js/expiredDelete.js');
-    body.appendChild(script);
-    script_ = script;
-
+    let last_script = document.querySelector('script:last-child');
+    if (!(last_script.getAttribute('src') == '/js/expiredDelete.js')) {
+        let script = document.createElement('script');
+        script.setAttribute('src', '/js/expiredDelete.js');
+        body.appendChild(script);
+        script_ = script;
+    }
     loader.remove();
     for (const btn of Buttons) {
         btn.setAttribute('data-nav-control', false);
@@ -119,10 +123,13 @@ LowStock_btn.addEventListener('click', async (e) => {
     let response = await fetch('/partial/low');
     let DOM = await response.text();
     MAIN.innerHTML = DOM;
-    let script = document.createElement('script');
-    script.setAttribute('src', '/js/lowDelete.js');
-    body.appendChild(script);
-    script_ = script;
+    let last_script = document.querySelector('script:last-child');
+    if (!(last_script.getAttribute('src') == '/js/lowDelete.js')) {
+        let script = document.createElement('script');
+        script.setAttribute('src', '/js/lowDelete.js');
+        body.appendChild(script);
+        script_ = script;
+    }
 
     loader.remove();
     for (const btn of Buttons) {

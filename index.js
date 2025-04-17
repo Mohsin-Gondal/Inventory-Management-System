@@ -243,6 +243,15 @@ app.post('/categories', async (req, res) => {
     }
 
 });
+app.get('/categories', async (req, res) => {
+    try {
+        let categoires = await DB.getAllCategories();
+        res.status(200).json(categoires);
+    } catch (er) {
+        res.status(400).json({ success: false, message: er.message });
+    }
+
+});
 app.post('/products', async (req, res) => {
     let { name, price, expiryDate, categoryId } = req.body;
     try {
@@ -272,22 +281,28 @@ app.get('/suppliers', async (req, res) => {
 });
 app.post('/stock', async (req, res) => {
     console.log("POST Request Recieved for Stock");
-    let total_Quantity = 0;
-    let { supplier, products } = req.body;
-    let lastStockID = await DB.getLastStockId();
-    lastStockID++;
-    console.log(lastStockID);
-    for (const product of products) {
-        total_Quantity += Number(product.quantityRecieved);
-        console.log(product," WITH QUANTITY ",product.quantityRecieved);
-    }
-    console.log("Total Quantity",total_Quantity);
-    await DB.addStock((lastStockID), total_Quantity, new Date(), supplier);
-    for (const product of products) {
-        // console.log(product);
-        console.log("New Quantity",await DB.getProductQuantity(product.ProductID) + Number(product.quantityRecieved));
-        await DB.updateProductQuantity(product.ProductID, (Number(await DB.getProductQuantity(product.ProductID)) + Number(product.quantityRecieved)));
-        await DB.addProductToStock(lastStockID, product.ProductID);
+    try{
+
+        let total_Quantity = 0;
+        let { supplier, products } = req.body;
+        let lastStockID = await DB.getLastStockId();
+        lastStockID++;
+        console.log(lastStockID);
+        for (const product of products) {
+            total_Quantity += Number(product.quantityRecieved);
+            console.log(product," WITH QUANTITY ",product.quantityRecieved);
+        }
+        console.log("Total Quantity",total_Quantity);
+        await DB.addStock((lastStockID), total_Quantity, new Date(), supplier);
+        for (const product of products) {
+            // console.log(product);
+            console.log("New Quantity",await DB.getProductQuantity(product.ProductID) + Number(product.quantityRecieved));
+            await DB.updateProductQuantity(product.ProductID, (Number(await DB.getProductQuantity(product.ProductID)) + Number(product.quantityRecieved)));
+            await DB.addProductToStock(lastStockID, product.ProductID);
+        }
+        res.status(200).json({message:"Stock Added Successfully"});
+    }catch(er){
+        res.status(400).json({message:er.message});
     }
 });
 

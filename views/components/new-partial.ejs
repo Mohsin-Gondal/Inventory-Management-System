@@ -24,7 +24,7 @@
             <div class="round-0 new-stock-main-left shadow-1  single-form-inside">
                 <h3>Add Products to Stock</h3>
                 <div class="stock-products height-100 max-height-100">
-                   
+
                 </div>
                 <form id="addStockForm" class="height-auto single-form mt-1" method="POST" action="/stock">
                     <div class="card width-100" id="newProductInStockCard">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <button id="add_stock" style="visibility: hidden;">Submit</button>
+                    <!-- <button id="add_stock" style="visibility: hidden;">Submit</button> -->
                 </form>
                 <h4 class="text-align-start p-1">Supplier</h4>
                 <select id="supplierSelect" class="input width-100" type="text" name="supplier" id="supplier">
@@ -73,7 +73,7 @@
                             placeholder="Quantity"> -->
                         <input class="width-100" type="number" min="1" name="price" id="price" placeholder="Price">
                         <input class="width-100" type="date" name="expiryDate" id="expiryDate">
-                        <select class="width-100" name="categoryId" id="category">
+                        <select class="width-100" name="categoryId" id="categorySelect">
                             <option value="1">Stationary</option>
                             <option value="2">Electronics</option>
                         </select>

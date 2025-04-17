@@ -251,7 +251,7 @@ module.exports.addProductToStock = (StockID,ProductID) => {
 
 module.exports.addStock = (StockID,Quantity,DateAdded,SupplierID) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO `stock_tracking` (StockID,QuantityReceived,DateAdded,SupplierID) VALUES (?,?,?,?);', [StockID,Quantity,DateAdded,SupplierID], (err, resutls, fields) => {
+        connection.query('INSERT INTO `stock_tracking` (StockID,QuantityReceived,DateUpdated,SupplierID) VALUES (?,?,?,?);', [StockID,Quantity,DateAdded,SupplierID], (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
