@@ -49,6 +49,7 @@
             </thead>
             <tbody>
                 <% for(const product of damagedProducts){ %>
+                    <% if (product.D_Quantity !== 0){  %>
                 <tr class="row top-row">
                     <td class="row-part"><%= product.DamageID %></td>
                     <td class="row-part"><%= product.Name %></td>
@@ -76,6 +77,7 @@
                         </button>
                     </td>
                 </tr>
+                <% } %>
                 <% } %>
             </tbody>
 

@@ -15,7 +15,7 @@ notificationButton.addEventListener('click', (e) => {
     }
     is_open = !is_open;
 });
-notficationPanel.addEventListener('mouseleave',(e)=>{
+notficationPanel.addEventListener('mouseleave', (e) => {
     e.stopPropagation();
     notificationButton.dispatchEvent(new Event('click'));
 })
@@ -47,3 +47,18 @@ async function loadNotifications() {
     }
 }
 loadNotifications();
+async function addNewNotification(Title, Description, Prodcut) {
+    try {
+        let response = await fetch('/notifications', {
+            method: 'POST',
+            body: {
+                Title,
+                Description,
+                Prodcut
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+

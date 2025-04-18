@@ -160,7 +160,7 @@ module.exports.updateDamagedProductQuantity = (id, quantity) => {
 }
 module.exports.getAllNotifications = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM notifications', (err, resutls, fields) => {
+        connection.query('SELECT * FROM notifications ORDER BY DateGenerated DESC', (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -185,6 +185,16 @@ module.exports.deleteNotificationById = (id) => {
                 reject(err);
             else
                 resolve(resutls[0]);
+        });
+    });
+}
+module.exports.addNotification = (title, desc) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO notifications (Title,Description) VALUES (?,?)', [title, desc], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls);
         });
     });
 }
@@ -218,9 +228,9 @@ module.exports.getCategoryById = (id) => {
         });
     });
 }
-module.exports.addProduct = (Name,Quantity,Price,ExpiryDate,CategoryID) => {
+module.exports.addProduct = (Name, Quantity, Price, ExpiryDate, CategoryID) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO products (Name,Quantity,Price,ExpiryDate,CategoryID) VALUES (?,?,?,?,?);', [Name,Quantity,Price,ExpiryDate,CategoryID], (err, resutls, fields) => {
+        connection.query('INSERT INTO products (Name,Quantity,Price,ExpiryDate,CategoryID) VALUES (?,?,?,?,?);', [Name, Quantity, Price, ExpiryDate, CategoryID], (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -238,9 +248,9 @@ module.exports.getLastStockId = () => {
         });
     });
 }
-module.exports.addProductToStock = (StockID,ProductID) => {
+module.exports.addProductToStock = (StockID, ProductID) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO stock_has_products (StockID,ProductID) VALUES (?,?);', [StockID,ProductID], (err, resutls, fields) => {
+        connection.query('INSERT INTO stock_has_products (StockID,ProductID) VALUES (?,?);', [StockID, ProductID], (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -249,9 +259,9 @@ module.exports.addProductToStock = (StockID,ProductID) => {
     });
 }
 
-module.exports.addStock = (StockID,Quantity,DateAdded,SupplierID) => {
+module.exports.addStock = (StockID, Quantity, DateAdded, SupplierID) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO `stock_tracking` (StockID,QuantityReceived,DateUpdated,SupplierID) VALUES (?,?,?,?);', [StockID,Quantity,DateAdded,SupplierID], (err, resutls, fields) => {
+        connection.query('INSERT INTO `stock_tracking` (StockID,QuantityReceived,DateUpdated,SupplierID) VALUES (?,?,?,?);', [StockID, Quantity, DateAdded, SupplierID], (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -259,9 +269,9 @@ module.exports.addStock = (StockID,Quantity,DateAdded,SupplierID) => {
         });
     });
 }
-module.exports.addSupplier = (Name,Address,Email,SpecCategory) => {
+module.exports.addSupplier = (Name, Address, Email, SpecCategory) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO suppliers (Name,Address,Email,SpecCategory) VALUES (?,?,?,?);', [Name,Address,Email,SpecCategory], (err, resutls, fields) => {
+        connection.query('INSERT INTO suppliers (Name,Address,Email,SpecCategory) VALUES (?,?,?,?);', [Name, Address, Email, SpecCategory], (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -279,6 +289,27 @@ module.exports.getAllSuplliers = () => {
         });
     });
 }
+module.exports.getAdmin = (email) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM admins WHERE Email = ?;', email, (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0]);
+        });
+    });
+}
+module.exports.addAdmin = (name, email, password, profile_path) => {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO admins (Name,Email,Password,Profile_Path) VALUES (?,?,?,?);', [name, email, password, profile_path], (err, resutls, fields) => {
+            if (err)
+                reject(err);
+            else
+                resolve(resutls[0]);
+        });
+    });
+}
+
 module.exports.connection = connection;
 
 

@@ -190,4 +190,5 @@ async function initNewStockLogic() {
     setProductsInSelect();
     setSuppliersInSelect();
     setCategoriesInSelect();
+    loadNotifications();
 }

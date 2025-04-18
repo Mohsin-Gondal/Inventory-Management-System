@@ -6,6 +6,7 @@ let main_loader_container = document.querySelector('.main-main .loader-container
 let MAIN = document.querySelector('.main-main');
 let Dashboard = document.querySelector('#idashboard');
 function focusButton(Buttons, focus) {
+    loadNotifications();
     for (const btn of Buttons) {
         if (script_)
             script_.remove();
@@ -28,6 +29,7 @@ function focusButton(Buttons, focus) {
 }
 let [Dashboard_btn, DamagedStock_btn, ExpiredStock_btn, LowStock_btn] = Buttons;
 Dashboard_btn.addEventListener('click', async (e) => {
+    loadNotifications();
     // main_loader_container.classList.remove('display-none');
 
 
@@ -74,6 +76,7 @@ Dashboard_btn.addEventListener('click', async (e) => {
     Dashboard_btn.setAttribute('data-nav-control', true);
 });
 DamagedStock_btn.addEventListener('click', async (e) => {
+    loadNotifications();
     // main_loader_container.classList.remove('display-none');
     focusButton(Buttons, DamagedStock_btn);
     let loader = createLoader();
@@ -95,6 +98,7 @@ DamagedStock_btn.addEventListener('click', async (e) => {
     DamagedStock_btn.setAttribute('data-nav-control', true);
 });
 ExpiredStock_btn.addEventListener('click', async (e) => {
+    loadNotifications();
     // main_loader_container.classList.remove('display-none');
     focusButton(Buttons, ExpiredStock_btn);
     let loader = createLoader();
@@ -116,6 +120,7 @@ ExpiredStock_btn.addEventListener('click', async (e) => {
     ExpiredStock_btn.setAttribute('data-nav-control', true);
 });
 LowStock_btn.addEventListener('click', async (e) => {
+    loadNotifications();
     // main_loader_container.classList.remove('display-none');
     focusButton(Buttons, LowStock_btn);
     let loader = createLoader();

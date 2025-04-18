@@ -69,6 +69,7 @@
             </thead>
             <tbody>
                 <% for(const product of allProducts) { %>
+                    <% if (product.Quantity !== 0){  %>
                 <tr class="row top-row">
                     <td class="row-part"><%= product.ProductID   %></td>
                     <td class="row-part"><%= product.Name %></td>
@@ -105,6 +106,7 @@
                         </button>
                     </td>
                 </tr>
+                <% } %>
                 <% } %>
             </tbody>
 
