@@ -25,6 +25,14 @@ app.use(session({
     saveUninitialized: true,
     // cookie:{secure:false},
 }));
+// Self Made : ) Middlewares
+function Auth(req, res, next) {
+    if (!req.session.user) {
+        res.redirect('/admin/login');
+    } else {
+        next();
+    }
+}
 
 // Multer Settings
 const storage = multer.diskStorage({
@@ -53,18 +61,14 @@ const upload = multer({
     }
 });
 // Routes
-app.get('/home', async (req, res) => {
-    if (!req.session.user) {
-        res.redirect('/admin/login');
-        return;
-    }
+app.get('/home', Auth, async (req, res) => {
     let Data = {
         moment,
         allProducts: await DB.getAllProducts(),
         damagedProducts: await DB.getDamagedProducts(),
         expiredProducts: await DB.getExpiredProducts(),
         notifications: await DB.getAllNotifications(),
-        user:req.session.user,
+        user: req.session.user,
     }
     // const [result, fields] = await connection.query('SELECT * FROM notifications');
     // connection.execute('SELECT * FROM notifications', (err, result, fields) => {
@@ -73,7 +77,7 @@ app.get('/home', async (req, res) => {
     res.render('pages/index', Data);
 });
 
-app.get('/partial/dashboard', async (req, res) => {
+app.get('/partial/dashboard', Auth, async (req, res) => {
     let Data = {
         moment,
         allProducts: await DB.getAllProducts(),
@@ -88,7 +92,7 @@ app.get('/partial/dashboard', async (req, res) => {
     console.log("Dashboard Component Sent by Server");
     res.render('components/dashboard-partial', Data);
 });
-app.get('/partial/damaged', async (req, res) => {
+app.get('/partial/damaged', Auth, async (req, res) => {
     let Data = {
         moment,
         allProductsCount: (await DB.getProductsCount())[0].Total,
@@ -100,7 +104,7 @@ app.get('/partial/damaged', async (req, res) => {
     console.log("Damaged Stock Component Sent by Server");
     res.render('components/damaged-partial', Data);
 });
-app.get('/partial/expired', async (req, res) => {
+app.get('/partial/expired', Auth, async (req, res) => {
     let Data = {
         moment,
         allProducts: await DB.getAllProducts(),
@@ -115,7 +119,7 @@ app.get('/partial/expired', async (req, res) => {
     console.log("Expired Stock Component Sent by Server");
     res.render('components/expired-partial', Data);
 });
-app.get('/partial/low', async (req, res) => {
+app.get('/partial/low', Auth, async (req, res) => {
     let Data = {
         moment,
         allProducts: await DB.getAllProducts(),
@@ -130,11 +134,11 @@ app.get('/partial/low', async (req, res) => {
     console.log("Low Stock Component Sent by Server");
     res.render('components/low-partial', Data);
 });
-app.get('/partial/new', (req, res) => {
+app.get('/partial/new', Auth, (req, res) => {
     console.log("New Stock Component Sent by Server");
     res.render('components/new-partial');
 });
-app.get('/partial/new-damaged/:id', async (req, res) => {
+app.get('/partial/new-damaged/:id', Auth, async (req, res) => {
     console.log(req.params.id);
     try {
         let product = await DB.findProductById(req.params.id);
@@ -144,7 +148,7 @@ app.get('/partial/new-damaged/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.get('/partial/delete-product/:id', async (req, res) => {
+app.get('/partial/delete-product/:id', Auth, async (req, res) => {
     console.log(req.params.id);
     try {
         let product = await DB.findProductById(req.params.id);
@@ -154,7 +158,7 @@ app.get('/partial/delete-product/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.get('/partial/delete-damaged-product/:id', async (req, res) => {
+app.get('/partial/delete-damaged-product/:id', Auth, async (req, res) => {
     console.log(req.params.id);
     try {
         let product = await DB.findProductById(req.params.id);
@@ -164,7 +168,7 @@ app.get('/partial/delete-damaged-product/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.get('/partial/remove-from-damaged/:id', async (req, res) => {
+app.get('/partial/remove-from-damaged/:id', Auth, async (req, res) => {
     console.log(req.params.id);
     try {
         let product = await DB.findProductById(req.params.id);
@@ -174,7 +178,7 @@ app.get('/partial/remove-from-damaged/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.post('/damaged_products/:id', async (req, res) => {
+app.post('/damaged_products/:id', Auth, async (req, res) => {
     console.log("Update Damaged Request Recieved");
     try {
         let { id } = req.params;
@@ -194,7 +198,7 @@ app.post('/damaged_products/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.delete('/damaged_products/:id', async (req, res) => {
+app.delete('/damaged_products/:id', Auth, async (req, res) => {
     console.log("DELETE Damaged Request Recieved");
     try {
         let { id } = req.params;
@@ -215,7 +219,7 @@ app.delete('/damaged_products/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.delete('/products/:id', async (req, res) => {
+app.delete('/products/:id', Auth, async (req, res) => {
     console.log("DELETE Product Request Recieved");
     try {
         let { id } = req.params;
@@ -247,7 +251,7 @@ app.delete('/products/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.get('/products/:name', async (req, res) => {
+app.get('/products/:name', Auth, async (req, res) => {
     console.log("GET Product By Name Request Recieved");
     try {
         let { name } = req.params;
@@ -257,7 +261,7 @@ app.get('/products/:name', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.get('/product/:id', async (req, res) => {
+app.get('/product/:id', Auth, async (req, res) => {
     console.log("GET Product By ID Request Recieved");
     try {
         let { id } = req.params;
@@ -267,11 +271,11 @@ app.get('/product/:id', async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 });
-app.get('/notifications', async (req, res) => {
+app.get('/notifications', Auth, async (req, res) => {
     let notifications = await DB.getAllNotifications();
     res.render('components/notifications-partial', { notifications, moment });
 });
-app.post('/notifications', async (req, res) => {
+app.post('/notifications', Auth, async (req, res) => {
     let { Title, Description, Product } = req.body;
     try {
         await DB.addNotification(Title, Description, Product);
@@ -280,7 +284,7 @@ app.post('/notifications', async (req, res) => {
         res.status(200).json({ success: false, message: er.message });
     }
 });
-app.delete('/notifications/:id', (req, res) => {
+app.delete('/notifications/:id', Auth, (req, res) => {
     let { id } = req.params;
     DB.deleteNotificationById(id);
     res.status(200).json({ success: true, message: "Notification Deleted" });
@@ -296,7 +300,7 @@ app.post('/categories', async (req, res) => {
     }
 
 });
-app.get('/categories', async (req, res) => {
+app.get('/categories', Auth, async (req, res) => {
     try {
         let categoires = await DB.getAllCategories();
         res.status(200).json(categoires);
@@ -305,7 +309,7 @@ app.get('/categories', async (req, res) => {
     }
 
 });
-app.post('/products', async (req, res) => {
+app.post('/products', Auth, async (req, res) => {
     let { name, price, expiryDate, categoryId } = req.body;
     try {
         await DB.addProduct(name, 0, price, expiryDate, categoryId);
@@ -316,7 +320,7 @@ app.post('/products', async (req, res) => {
     }
 
 });
-app.get('/products', async (req, res) => {
+app.get('/products', Auth, async (req, res) => {
     try {
         let response = await DB.getAllProducts();
         // let result = await response.json();
@@ -325,7 +329,7 @@ app.get('/products', async (req, res) => {
         res.status(500).json({ success: false, message: er.message });
     }
 });
-app.get('/suppliers', async (req, res) => {
+app.get('/suppliers', Auth, async (req, res) => {
     try {
         let suppliers = await DB.getAllSuplliers();
         res.status(200).json(suppliers);
@@ -333,7 +337,7 @@ app.get('/suppliers', async (req, res) => {
         res.status(400).json({ message: er.message });
     }
 });
-app.post('/stock', async (req, res) => {
+app.post('/stock', Auth, async (req, res) => {
     console.log("POST Request Recieved for Stock");
     try {
 
@@ -365,11 +369,15 @@ app.post('/stock', async (req, res) => {
         res.status(400).json({ message: er.message });
     }
 });
-app.get('/admin/register', (req, res) => {
-    res.render('pages/register');
-});
 app.get('/admin/login', (req, res) => {
     res.render('pages/login');
+});
+app.get('/admin/register', Auth, (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/admin/login');
+        return;
+    }
+    res.render('pages/register');
 });
 app.post('/login', async (req, res) => {
     let { email, password } = req.body;
@@ -383,7 +391,7 @@ app.post('/login', async (req, res) => {
     } else {
         if (foundUser.Password == password) {
             req.session.user = {
-                id:foundUser.AdminID,
+                id: foundUser.AdminID,
                 name: foundUser.Name,
                 email: foundUser.Email,
                 password: foundUser.Password,
@@ -395,7 +403,8 @@ app.post('/login', async (req, res) => {
         }
     }
 });
-app.post('/register', upload.single('image'), async (req, res) => {
+app.post('/register', Auth, upload.single('image'), async (req, res) => {
+
     let { name, email, password } = req.body;
     const profile_path = req.file ? `/profiles/${req.file.filename}` : `/profiles/default.png`;
 
@@ -408,7 +417,11 @@ app.post('/register', upload.single('image'), async (req, res) => {
     } catch (er) {
         res.status(400).json({ success: false, message: er.message });
     }
-})
+});
+app.get('/logout', Auth, (req, res) => {
+    req.session.destroy();
+    res.redirect('/admin/login');
+});
 
 
 //Server Listening

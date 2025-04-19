@@ -1,7 +1,7 @@
 const connection = require('./connection');
 module.exports.getAllProducts = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT p.*,c.Name AS C_NAME FROM products p INNER JOIN categories c ON c.CategoryID = p.CategoryID', (err, resutls, fields) => {
+        connection.query('SELECT p.*,c.Name AS C_NAME FROM products p INNER JOIN categories c ON c.CategoryID = p.CategoryID ORDER BY ProductID ASC', (err, resutls, fields) => {
             if (err)
                 reject(err);
             else
@@ -138,6 +138,7 @@ module.exports.getProductQuantity = (id) => {
         });
     });
 }
+
 module.exports.updateProductQuantity = (id, quantity) => {
     return new Promise((resolve, reject) => {
         connection.query('UPDATE products SET Quantity = ? WHERE ProductID = ?;', [quantity, id], (err, resutls, fields) => {
@@ -148,6 +149,7 @@ module.exports.updateProductQuantity = (id, quantity) => {
         });
     });
 }
+
 module.exports.updateDamagedProductQuantity = (id, quantity) => {
     return new Promise((resolve, reject) => {
         connection.query('UPDATE damaged_stock SET Quantity = ? WHERE ProductID = ?;', [quantity, id], (err, resutls, fields) => {
@@ -158,6 +160,7 @@ module.exports.updateDamagedProductQuantity = (id, quantity) => {
         });
     });
 }
+
 module.exports.getAllNotifications = () => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM notifications ORDER BY DateGenerated DESC', (err, resutls, fields) => {
@@ -168,6 +171,7 @@ module.exports.getAllNotifications = () => {
         });
     });
 }
+
 module.exports.getNotificationById = (id) => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM notifications WHERE NotificationID = ?', id, (err, resutls, fields) => {
@@ -178,6 +182,7 @@ module.exports.getNotificationById = (id) => {
         });
     });
 }
+
 module.exports.deleteNotificationById = (id) => {
     return new Promise((resolve, reject) => {
         connection.query('DELETE FROM notifications WHERE NotificationID = ?', id, (err, resutls, fields) => {
@@ -188,6 +193,7 @@ module.exports.deleteNotificationById = (id) => {
         });
     });
 }
+
 module.exports.addNotification = (title, desc) => {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO notifications (Title,Description) VALUES (?,?)', [title, desc], (err, resutls, fields) => {
@@ -198,6 +204,7 @@ module.exports.addNotification = (title, desc) => {
         });
     });
 }
+
 module.exports.addCategory = (title, desc) => {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO categories (Name,Description) VALUES (?,?)', [title, desc], (err, resutls, fields) => {
@@ -208,6 +215,7 @@ module.exports.addCategory = (title, desc) => {
         });
     });
 }
+
 module.exports.getAllCategories = () => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM categories;', (err, resutls, fields) => {
@@ -218,6 +226,7 @@ module.exports.getAllCategories = () => {
         });
     });
 }
+
 module.exports.getCategoryById = (id) => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM categories WHERE CategoryID = ?;', id, (err, resutls, fields) => {
@@ -228,6 +237,7 @@ module.exports.getCategoryById = (id) => {
         });
     });
 }
+
 module.exports.addProduct = (Name, Quantity, Price, ExpiryDate, CategoryID) => {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO products (Name,Quantity,Price,ExpiryDate,CategoryID) VALUES (?,?,?,?,?);', [Name, Quantity, Price, ExpiryDate, CategoryID], (err, resutls, fields) => {
@@ -238,6 +248,7 @@ module.exports.addProduct = (Name, Quantity, Price, ExpiryDate, CategoryID) => {
         });
     });
 }
+
 module.exports.getLastStockId = () => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT MAX(StockID) AS Stock_ID FROM stock_tracking;', (err, resutls, fields) => {
@@ -248,6 +259,7 @@ module.exports.getLastStockId = () => {
         });
     });
 }
+
 module.exports.addProductToStock = (StockID, ProductID) => {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO stock_has_products (StockID,ProductID) VALUES (?,?);', [StockID, ProductID], (err, resutls, fields) => {
@@ -269,6 +281,7 @@ module.exports.addStock = (StockID, Quantity, DateAdded, SupplierID) => {
         });
     });
 }
+
 module.exports.addSupplier = (Name, Address, Email, SpecCategory) => {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO suppliers (Name,Address,Email,SpecCategory) VALUES (?,?,?,?);', [Name, Address, Email, SpecCategory], (err, resutls, fields) => {
@@ -279,6 +292,7 @@ module.exports.addSupplier = (Name, Address, Email, SpecCategory) => {
         });
     });
 }
+
 module.exports.getAllSuplliers = () => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM suppliers;', (err, resutls, fields) => {
@@ -289,6 +303,7 @@ module.exports.getAllSuplliers = () => {
         });
     });
 }
+
 module.exports.getAdmin = (email) => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM admins WHERE Email = ?;', email, (err, resutls, fields) => {
@@ -299,6 +314,7 @@ module.exports.getAdmin = (email) => {
         });
     });
 }
+
 module.exports.addAdmin = (name, email, password, profile_path) => {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO admins (Name,Email,Password,Profile_Path) VALUES (?,?,?,?);', [name, email, password, profile_path], (err, resutls, fields) => {

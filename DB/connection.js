@@ -5,10 +5,5 @@ const connection = mysql.createConnection({
     password: 'root',
     database: 'inventory_ms'
 });
-connection.connect((err) => {
-    if (err)
-        console.log('Error Occured', err);
-    console.log("Database Connection Succeed");
-
-})
+connection.connect();
 module.exports = connection;
