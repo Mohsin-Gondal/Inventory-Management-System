@@ -19,142 +19,70 @@
             <button class="btn btn-secondary">All Products</button> -->
             <p class="fw-600">Enter Products</p>
         </div>
-        <form method="post" action="/stock" class="p-1">
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Electronics</button>
-                    <div class="card-top-value">
-                        <p class="value">45 Units</p>
-                    </div>
+
+        <div class="new-stock-main">
+            <div class="round-0 new-stock-main-left shadow-1  single-form-inside">
+                <h3>Add Products to Stock</h3>
+                <div class="stock-products height-100 max-height-100">
+
                 </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>80$/Unit</b>
-                        <b>EXP: 01 JAN 2028</b>
-                    </p>
-                    <h1 class="card-bottom-value">Wireless Mouse</h1>
+                <form id="addStockForm" class="height-auto single-form mt-1" method="POST" action="/stock">
+                    <div class="card width-100" id="newProductInStockCard">
+                        <div class="card-top">
+                            <select id="productsSelection" class="btn btn-secondary-outline width-100">
+                            </select>
+                            <div class="card-top-value">
+                            </div>
+                        </div>
+                        <div class="card-bottom flex-end width-100 g-1">
+                            <label for="QuantityRecieved"><b>Units Recieved</b></label>
+                            <input id="QuantityRecieved" name="QuantityRecieved"
+                                class="btn btn-secondary btn-svg p-1 fs-1" type="number" min="1" value="1">
+                            <button type="button" id="addToStockBtn" class="btn btn-secondary btn-svg">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- <button id="add_stock" style="visibility: hidden;">Submit</button> -->
+                </form>
+                <h4 class="text-align-start p-1">Supplier</h4>
+                <select id="supplierSelect" class="input width-100" type="text" name="supplier" id="supplier">
+                </select>
+            </div>
+            <div class="new-stock-main-right">
+                <div class="round-0 new-stock-main-right-upper shadow-1 single-form-inside">
+                    <h3>Add Categories</h3>
+                    <form id="addCategoryForm" class="single-form" method="POST" action="/categories">
+                        <input class="width-100" type="text" name="name" id="name" placeholder="Name">
+                        <input class="width-100" type="text" name="description" id="description"
+                            placeholder="Description">
+                        <button class="btn active-asi-btn width-100">Save</button>
+                    </form>
+                </div>
+                <div class="round-0 new-stock-main-right-lower shadow-1 single-form-inside">
+                    <h3>Add Products</h3>
+                    <form id="addProductForm" class="single-form" method="POST" action="/products">
+                        <input class="width-100" type="text" name="name" id="name" placeholder="Name">
+                        <!-- <input class="width-100" type="number" min="1" name="quantity" id="quantity"
+                            placeholder="Quantity"> -->
+                        <input class="width-100" type="number" min="1" name="price" id="price" placeholder="Price">
+                        <input class="width-100" type="date" name="expiryDate" id="expiryDate">
+                        <select class="width-100" name="categoryId" id="categorySelect">
+                            <option value="1">Stationary</option>
+                            <option value="2">Electronics</option>
+                        </select>
+                        <button class="btn active-asi-btn width-100">Save</button>
+                    </form>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Grocery</button>
-                    <div class="card-top-value">
-                        <p class="value">200 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>5$/Unit</b>
-                        <b>EXP: 15 NOV 2025</b>
-                    </p>
-                    <h1 class="card-bottom-value">Olive Oil Bottle</h1>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Stationary</button>
-                    <div class="card-top-value">
-                        <p class="value">95 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>3$/Unit</b>
-                        <b>EXP: 03 MAR 2031</b>
-                    </p>
-                    <h1 class="card-bottom-value">Highlighter Pens</h1>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Cleaning</button>
-                    <div class="card-top-value">
-                        <p class="value">60 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>8$/Unit</b>
-                        <b>EXP: 21 JUL 2026</b>
-                    </p>
-                    <h1 class="card-bottom-value">Floor Cleaner</h1>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Pharmacy</button>
-                    <div class="card-top-value">
-                        <p class="value">180 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>25$/Unit</b>
-                        <b>EXP: 09 DEC 2029</b>
-                    </p>
-                    <h1 class="card-bottom-value">Vitamin C Tablets</h1>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Stationary</button>
-                    <div class="card-top-value">
-                        <p class="value">60 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>1.5$/Unit</b>
-                        <b>EXP: 11 AUG 2027</b>
-                    </p>
-                    <h1 class="card-bottom-value">A4 Notebooks</h1>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">Kitchen</button>
-                    <div class="card-top-value">
-                        <p class="value">37 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>16$/Unit</b>
-                        <b>EXP: 30 SEP 2028</b>
-                    </p>
-                    <h1 class="card-bottom-value">Non-stick Frypan</h1>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <button class="btn btn-secondary-outline">
-                        Stationary
-                    </button>
-
-                    <div class="card-top-value">
-                        <p class="value">120 Units</p>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <p class="card-bottom-header flex-justalign-between-col width-100">
-                        <b>12$/Unit</b>
-                        <b>EXP: 12 MARCH 2030 </b>
-                    </p>
-                    <h1 class="card-bottom-value">
-                        Dollar Markers
-                    </h1>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-
     <button id="saveStockBtn" class="btn active-asi-btn flex-justalign-center mt-1 fs-1">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>

@@ -9,7 +9,7 @@
 
     border-radius: 8px;
     
-    overflow: hidden;
+    /* overflow: hidden; */
     
 }
 
@@ -23,6 +23,8 @@
     
     border: none;
     outline: none;
+
+    border-radius: 5px;
 
     transition-duration: 300ms;
     font-family: 'Courier New', Courier, monospace;

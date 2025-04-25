@@ -10,8 +10,8 @@
                     </svg> </button>
 
                 <div class="card-top-value">
-                    <p class="value">10,200 Prodcuts</p>
-                    <p class="value value-warn">52 On Low</p>
+                    <p class="value"><%= allProductsCount %> Prodcuts Available</p>
+                    <p class="value value-warn"><%= lowCount %> On Low</p>
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414z"></path></svg> -->
 
                 </div>
@@ -21,7 +21,7 @@
                     Damaged Prodcuts
                 </p>
                 <h1 class="card-bottom-value">
-                    1,200
+                   <%= damagedCount %>
                 </h1>
             </div>
         </div>
@@ -48,15 +48,17 @@
                 </tr>
             </thead>
             <tbody>
+                <% for(const product of damagedProducts){ %>
+                    <% if (product.D_Quantity !== 0){  %>
                 <tr class="row top-row">
-                    <td class="row-part">1</td>
-                    <td class="row-part">Vitamin C</td>
-                    <td class="row-part">Medicine</td>
-                    <td class="row-part">12$</td>
-                    <td class="row-part">20</td>
-                    <td class="row-part">2 DEC 2026</td>
+                    <td class="row-part"><%= product.DamageID %></td>
+                    <td class="row-part"><%= product.Name %></td>
+                    <td class="row-part"><%= product.C_NAME %></td>
+                    <td class="row-part"><%= product.Price %>$</td>
+                    <td class="row-part"><%= product.D_Quantity %></td>
+                    <td class="row-part"><%= moment(product.ExpiryDate).format('DD-MM-YYYY') %></td>
                     <td class="row-part flex-justalign-center">
-                        <button id="removeFromDamagedBtn" class="btn btn-secondary">
+                        <button data-prod="<%= product.ProductID %>" id="removeFromDamagedBtn" class="btn btn-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="m10.998 16 5-4-5-4v3h-9v2h9z"></path>
                                 <path
@@ -66,7 +68,7 @@
                         </button>
                     </td>
                     <td class="row-part flex-justalign-center">
-                        <button id="deleteProductBtn" class="btn btn-secondary">
+                        <button data-prod="<%= product.ProductID %>" id="deleteProductBtn" class="btn btn-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z">
@@ -75,7 +77,8 @@
                         </button>
                     </td>
                 </tr>
-
+                <% } %>
+                <% } %>
             </tbody>
 
         </table>
