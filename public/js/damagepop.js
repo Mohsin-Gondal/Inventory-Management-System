@@ -57,7 +57,7 @@ function setupDynamicFormSubmission_for_Update(btn_active_after_submission) {
             });
             let result = await res.json();
             btn_active_after_submission.dispatchEvent(new Event('click'));
-
+            
         } catch (err) {
             console.error(err);
         }
