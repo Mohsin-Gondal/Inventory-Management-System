@@ -28,8 +28,9 @@ This is a full-stack **Inventory Management System** built using `Node.js`, `Exp
 ---
 
 ## 📸 Screenshots
-
+> Dashboard
 > ![Dashboard Screenshot](screenshots/add_stock.png)
+> New Stock
 > ![Add Stock Screenshot](screenshots/dashboard.png)
 
 ---
