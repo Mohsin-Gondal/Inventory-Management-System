@@ -89,7 +89,6 @@ app.get('/partial/dashboard', Auth, async (req, res) => {
         expiredCount: (await DB.getExpiredCount())[0].Total,
         lowCount: (await DB.getLowCount())[0].Total,
     }
-    console.log("Dashboard Component Sent by Server");
     res.render('components/dashboard-partial', Data);
 });
 app.get('/partial/damaged', Auth, async (req, res) => {
@@ -101,7 +100,7 @@ app.get('/partial/damaged', Auth, async (req, res) => {
         damagedProducts: await DB.getDamagedProducts(),
     };
     // console.log(Data.damagedProducts);
-    console.log("Damaged Stock Component Sent by Server");
+
     res.render('components/damaged-partial', Data);
 });
 app.get('/partial/expired', Auth, async (req, res) => {
@@ -116,7 +115,7 @@ app.get('/partial/expired', Auth, async (req, res) => {
         expiredCount: (await DB.getExpiredCount())[0].Total,
         lowCount: (await DB.getLowCount())[0].Total,
     }
-    console.log("Expired Stock Component Sent by Server");
+
     res.render('components/expired-partial', Data);
 });
 app.get('/partial/low', Auth, async (req, res) => {
@@ -131,59 +130,58 @@ app.get('/partial/low', Auth, async (req, res) => {
         expiredCount: (await DB.getExpiredCount())[0].Total,
         lowCount: (await DB.getLowCount())[0].Total,
     }
-    console.log("Low Stock Component Sent by Server");
     res.render('components/low-partial', Data);
 });
 app.get('/partial/new', Auth, (req, res) => {
-    console.log("New Stock Component Sent by Server");
+
     res.render('components/new-partial');
 });
 app.get('/partial/new-damaged/:id', Auth, async (req, res) => {
-    console.log(req.params.id);
+
     try {
         let product = await DB.findProductById(req.params.id);
-        console.log("New Stock Component Sent by Server");
+
         res.render('components/add-damaged-partial', { product });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
 });
 app.get('/partial/delete-product/:id', Auth, async (req, res) => {
-    console.log(req.params.id);
+
     try {
         let product = await DB.findProductById(req.params.id);
-        console.log("Delete Product Component Sent by Server");
+
         res.render('components/delete-product-partial', { product });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
 });
 app.get('/partial/delete-damaged-product/:id', Auth, async (req, res) => {
-    console.log(req.params.id);
+
     try {
         let product = await DB.findProductById(req.params.id);
-        console.log("Delete Product Component Sent by Server");
+
         res.render('components/delete-damaged-product-partial', { product });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
 });
 app.get('/partial/remove-from-damaged/:id', Auth, async (req, res) => {
-    console.log(req.params.id);
+
     try {
         let product = await DB.findProductById(req.params.id);
-        console.log("Delete Product Component Sent by Server");
+
         res.render('components/remove-damaged-partial', { product });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
 });
 app.post('/damaged_products/:id', Auth, async (req, res) => {
-    console.log("Update Damaged Request Recieved");
+
     try {
         let { id } = req.params;
         let { count } = req.body;
-        console.log(id, count);
+
 
         DB.addDamaged(id, count);
         let Product = await DB.findProductById(id);
@@ -199,12 +197,12 @@ app.post('/damaged_products/:id', Auth, async (req, res) => {
     }
 });
 app.delete('/damaged_products/:id', Auth, async (req, res) => {
-    console.log("DELETE Damaged Request Recieved");
+
     try {
         let { id } = req.params;
         let { count } = req.body;
         // count = Number(count);
-        console.log(id, count);
+
         let product = await DB.findProductById(id);
         let D_Quan = await DB.getProductDamagedQuantity(id);
         if (D_Quan >= count) {
@@ -220,15 +218,15 @@ app.delete('/damaged_products/:id', Auth, async (req, res) => {
     }
 });
 app.delete('/products/:id', Auth, async (req, res) => {
-    console.log("DELETE Product Request Recieved");
+
     try {
         let { id } = req.params;
         let { count } = req.body;
         let { from } = req.query;
-        console.log(id, count, req.query);
+
         if (from == "DAMAGED") {
             let D_Quan = await DB.getProductDamagedQuantity(id);
-            console.log(D_Quan);
+
             if (D_Quan >= count) {
                 await DB.updateDamagedProductQuantity(id, (D_Quan - count));
                 res.status(200).json({ success: true, message: 'Products Removed' });
@@ -252,7 +250,7 @@ app.delete('/products/:id', Auth, async (req, res) => {
     }
 });
 app.get('/products/:name', Auth, async (req, res) => {
-    console.log("GET Product By Name Request Recieved");
+
     try {
         let { name } = req.params;
         let products = await DB.findProductsByName(name);
@@ -262,7 +260,7 @@ app.get('/products/:name', Auth, async (req, res) => {
     }
 });
 app.get('/product/:id', Auth, async (req, res) => {
-    console.log("GET Product By ID Request Recieved");
+
     try {
         let { id } = req.params;
         let products = await DB.findProductById(id);
@@ -338,23 +336,23 @@ app.get('/suppliers', Auth, async (req, res) => {
     }
 });
 app.post('/stock', Auth, async (req, res) => {
-    console.log("POST Request Recieved for Stock");
+
     try {
 
         let total_Quantity = 0;
         let { supplier, products } = req.body;
         let lastStockID = await DB.getLastStockId();
         lastStockID++;
-        console.log(lastStockID);
+
         for (const product of products) {
             total_Quantity += Number(product.quantityRecieved);
-            console.log(product, " WITH QUANTITY ", product.quantityRecieved);
+
         }
-        console.log("Total Quantity", total_Quantity);
+
         await DB.addStock((lastStockID), total_Quantity, new Date(), supplier);
         for (const product of products) {
-            // console.log(product);
-            console.log("New Quantity", await DB.getProductQuantity(product.ProductID) + Number(product.quantityRecieved));
+
+
             await DB.updateProductQuantity(product.ProductID, (Number(await DB.getProductQuantity(product.ProductID)) + Number(product.quantityRecieved)));
             await DB.addProductToStock(lastStockID, product.ProductID);
         }
@@ -383,8 +381,7 @@ app.post('/login', async (req, res) => {
     let { email, password } = req.body;
 
     let foundUser = await DB.getAdmin(email);
-    console.log(foundUser.Email, foundUser.Password);
-    console.log(foundUser);
+
 
     if (!foundUser) {
         return res.status(400).json({ success: false, message: 'Account not found!' })
@@ -408,7 +405,7 @@ app.post('/register', Auth, upload.single('image'), async (req, res) => {
     let { name, email, password } = req.body;
     const profile_path = req.file ? `/profiles/${req.file.filename}` : `/profiles/default.png`;
 
-    console.log(profile_path, name, email, password);
+
     try {
 
         await DB.addAdmin(name, email, password, profile_path);
