@@ -1,7 +1,7 @@
 # 📦 Inventory Management System
 
 This is a full-stack **Inventory Management System** built using `Node.js`, `Express`, and `MySQL` with EJS templating on the frontend.
-
+This project was part of my learning phase. It's a simulation of an inventory system done using core web technologies and SQL. It’s not perfect — but it helped me grow.
 ---
 
 ## 🔧 Features
